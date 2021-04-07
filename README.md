@@ -10,8 +10,11 @@ This tool has been developed to extend native functionality within Dynamics 365.
 ## Setup
 There are a few steps to essentially get this solution to work:
 1. Configure App.config with a valid connection string to your Dataverse environment
-2. Create and publish your duplicate detection rules for a given Table prior to running the tool. NB: Set always "exclude inactive matching records" to true
-3. Run the application on a machine that can reach your target environment
+2. Create and publish your duplicate detection rules for a given Table prior to running the tool. NB:
+3. There is a number of configurations you should focus on from a duplicate detection rule set POV:. 
+    - Always set "exclude inactive matching records" to avoid considering inactive records as "duplicates"
+    - Set "ignore blanks" on data field validations (e.g.: email address) to avoid considering records with blank fields as "duplicates" (e.g.: contacts with no email address)
+5. Run the application on a machine that can reach your target environment
 
 
 
@@ -32,22 +35,23 @@ This is a guide if you want to quickly test the application features
 2. Run the application.
 3. Select a table to look for its duplicates.
 4. Confirm that the intended duplicate detection rules are published.
-5. Click **Apply Rules** (and then wait for both process bars to be complete);
+5. Make sure rules have been configured as per the **Setup section** above!
+6. Click **Apply Rules** (and then wait for both process bars to be complete);
     - In case of more than 5.000 duplicate records are found, press OK in the warning message
-6. Check the **Records Found** and **Groups** processed for the duplicate records
-7. Create a FetchXML expression that would define the rules for the master records and paste it in the FetchXML textbox.
+7. Check the **Records Found** and **Groups** processed for the duplicate records
+8. Create a FetchXML expression that would define the rules for the master records and paste it in the FetchXML textbox.
     - This FetchXML can be generated from the Advanced Find in CRM.
-8. **Click Merge Data**. A confirmation dialog is displayed enquiring the confirmation of the master rules. Click Yes once confirmed.
-9. Check the progress of the merge requests in the progress bar.
+9. **Click Merge Data**. A confirmation dialog is displayed enquiring the confirmation of the master rules. Click Yes once confirmed.
+10. Check the progress of the merge requests in the progress bar.
     - Note that a Batch Running label is displayed with the number of the batch that is currently running. A new duplicate record batch is processed for every 5.000 records found.
-10. Once the duplicate detection job is complete, a dialog is displayed informing of its completion. Click **OK**.
-11. Check the displayed statistics for information on elapsed time for the operations.
-12. Confirm the data has been correctly merged on CRM for the master records, whilst the slave records have been disabled.
+11. Once the duplicate detection job is complete, a dialog is displayed informing of its completion. Click **OK**.
+12. Check the displayed statistics for information on elapsed time for the operations.
+13. Confirm the data has been correctly merged on CRM for the master records, whilst the slave records have been disabled.
 
 ### ------- Detailed Guide -------
 ### Choose a Table
 
-When the user starts the application, it prompts a window displaying a selection box and a table should be picked from the list. This is the table type that will be used to query the duplicate records.
+When the user starts the application, it prompts a window displaying a selection box and a table should be picked from the list. This is the table type that will be used to query the duplicate records. 
  
 ![image](https://user-images.githubusercontent.com/16020111/113573769-b24e8480-9612-11eb-90c7-244792fb3bc3.png)
 
